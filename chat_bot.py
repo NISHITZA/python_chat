@@ -3,8 +3,8 @@ import time
 continue_flag = 1
 tickets = ['123','124']
 ticket_status = {
-    '123':'res',
-    '1234':'not_res'
+    '123':'1',
+    '1234':'0'
 }
 
 while (continue_flag==1):
@@ -28,9 +28,12 @@ while (continue_flag==1):
             print('Please enter your ticket number')
             ticket_number = input()
             try:
-                if(ticket_status[ticket_number]):
-                    ticket_flag=0
-                    print('Ticket number found')
+                ticket_flag=0
+                print('Ticket number found')
+                if(ticket_status[ticket_number]==1):
+                    print('The ticket has been resolved')
+                else:
+                    print('The ticket has not yet been resolved, we are going our best to solve it')
             except Exception:
                 print('Ticket number not found, please enter again')
                 
@@ -49,4 +52,3 @@ while (continue_flag==1):
         continue_flag = 0
         print('Thank you!\n\n\n')
     
-
