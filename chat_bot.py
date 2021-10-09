@@ -60,6 +60,25 @@ while (continue_flag==1):
                 issue_product=i
 
         print('Product '+issue_product)
+        print('What is your issue with your product')
+        print('1.Delayed Shippin')
+        print('2.Damage Product Delivere')
+        print('3.Return/Replacement')
+        print('Please enter your choice')
+        product_issue_selection = input()
+        
+        product_issue_detail =''
+        if(int(product_issue_selection)==1):
+            product_issue_detail="Delayed Shippin"
+        elif(int(product_issue_selection)==2):
+            product_issue_detail="Damage Product Delivere"
+        elif(int(product_issue_selection)==3):
+            product_issue_detail="Return/Replacement"
+
+        print('Please provide a description for your issue ')
+
+        product_issue_description = input()
+
 
 
 
