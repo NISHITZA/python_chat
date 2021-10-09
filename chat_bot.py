@@ -1,4 +1,7 @@
 import time
+import json
+import random
+
 
 continue_flag = 1
 tickets = ['123','124']
@@ -38,16 +41,71 @@ while (continue_flag==1):
                 print('Ticket number not found, please enter again')
                 
     else:
-        print('Create new ticket number')
-    
+        print('Create new ticket')
+        
+        json_file = open('products.json',)
+        product_list = json.load(json_file)
 
+        print('Product List:')
 
+        for i in product_list['products']:
+            print(i)
 
+        print('For which product do you want to raise a ticket ')
+        product_choice = input()
+        issue_product = ''
+        temp_count = 0
+        for i in product_list['products']:
+            temp_count = temp_count+1
+            if(temp_count==int(product_choice)):
+                issue_product=i
 
-    print('Do you want to continue? Y/N \n\n\n')
+        print('Product '+issue_product)
+        print('What is your issue with your product')
+        print('1.Delayed Shippin')
+        print('2.Damage Product Delivere')
+        print('3.Return/Replacement')
+        print('Please enter your choice')
+        product_issue_selection = input()
+        
+        product_issue_detail =''
+        if(int(product_issue_selection)==1):
+            product_issue_detail="Delayed Shippin"
+        elif(int(product_issue_selection)==2):
+            product_issue_detail="Damage Product Delivere"
+        elif(int(product_issue_selection)==3):
+            product_issue_detail="Return/Replacement"
+
+        print('Please provide a description for your issue ')
+
+        product_issue_description = input()
+        ticket_number = ''
+        ticket_number_generation_flag = 1
+        while(ticket_number_generation_flag==1):
+            random_number = random.randrange(1, 500, 1)
+            for j in tickets:
+                if(int(j)==random_number):
+                    ticket_number_generation_flag=1
+                else:
+                    ticket_number_generation_flag=0
+                    ticket_number=str(random_number)
+                    ticket_status[ticket_number]='0'
+        
+        print('Your ticket number is '+ticket_number)
+        print('We will work quickly to resolve your issue')
+
+        issue_details = ''
+        issue_details = issue_details +ticket_number+','+ issue_product + ',' + product_issue_detail + ',' + product_issue_description
+
+        issue_file = open("product_issue", "a")
+        issue_file.write(issue_details)
+        issue_file.close() 
+
+    print('Do you want to continue? Y/N ')
     end_choice = input()
     if(end_choice=='y' or end_choice=='Y'):
         continue_flag = 1
+        print('\n\n\n')
     else:
         continue_flag = 0
         print('Thank you!\n\n\n')
