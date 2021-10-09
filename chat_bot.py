@@ -1,5 +1,6 @@
 import time
 import json
+import random
 
 
 continue_flag = 1
@@ -78,6 +79,23 @@ while (continue_flag==1):
         print('Please provide a description for your issue ')
 
         product_issue_description = input()
+        ticket_number = ''
+        ticket_number_generation_flag = 1
+        while(ticket_number_generation_flag==1):
+            random_number = random.randrange(1, 500, 1)
+            for j in tickets:
+                if(int(j)==random_number):
+                    ticket_number_generation_flag=1
+                else:
+                    ticket_number_generation_flag=0
+                    ticket_number=str(random_number)
+                    ticket_status[ticket_number]='0'
+        
+        print('Your ticket number is '+ticket_number)
+        print('We will work quickly to resolve your issue')
+
+        issue_details = ''
+        issue_details = issue_details +ticket_number+','+ issue_product + ',' + product_issue_detail + ',' + product_issue_description
 
 
 
