@@ -2,7 +2,6 @@ import time
 import json
 import random
 
-
 continue_flag = 1
 tickets = ['123','124']
 ticket_status = {
@@ -52,29 +51,49 @@ while (continue_flag==1):
             print(i)
 
         print('For which product do you want to raise a ticket ')
-        product_choice = input()
+        product_selection_flag = 1
         issue_product = ''
-        temp_count = 0
-        for i in product_list['products']:
-            temp_count = temp_count+1
-            if(temp_count==int(product_choice)):
-                issue_product=i
-
-        print('Product '+issue_product)
-        print('What is your issue with your product')
-        print('1.Delayed Shippin')
-        print('2.Damage Product Delivere')
-        print('3.Return/Replacement')
-        print('Please enter your choice')
-        product_issue_selection = input()
-        
+        while(product_selection_flag==1):
+            try:
+                product_choice = int(input())
+            except Exception:
+                print('Please enter the correct option')
+                continue
+            temp_count = 0
+            for i in product_list['products']:
+                temp_count = temp_count+1
+                if(temp_count==product_choice):
+                    issue_product=i
+                    product_selection_flag = 0
+                    break
+            print('The product choice you have entered does not exist, please try again') 
+            
+        print('Product -'+issue_product)
+        issue_selection_flag = 1
         product_issue_detail =''
-        if(int(product_issue_selection)==1):
-            product_issue_detail="Delayed Shippin"
-        elif(int(product_issue_selection)==2):
-            product_issue_detail="Damage Product Delivere"
-        elif(int(product_issue_selection)==3):
-            product_issue_detail="Return/Replacement"
+        while(issue_selection_flag == 1):
+            print('What is your issue with your product')
+            print('1.Delayed Shippin')
+            print('2.Damage Product Delivere')
+            print('3.Return/Replacement')
+            print('Please enter your choice')
+            try:
+                product_issue_selection = int(input())
+            except Exception:
+                print('Please enter the correct choice')
+                continue
+            
+            if(product_issue_selection==1):
+                product_issue_detail="Delayed Shippin"
+                issue_selection_flag = 0
+            elif(product_issue_selection==2):
+                product_issue_detail="Damage Product Delivere"
+                issue_selection_flag = 0
+            elif(product_issue_selection==3):
+                issue_selection_flag = 0
+                product_issue_detail="Return/Replacement"
+            else:
+                print('Please enter the correct choice')
 
         print('Please provide a description for your issue ')
 
