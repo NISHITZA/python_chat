@@ -97,9 +97,9 @@ while (continue_flag==1):
         issue_details = ''
         issue_details = issue_details +ticket_number+','+ issue_product + ',' + product_issue_detail + ',' + product_issue_description
 
-
-
-
+        issue_file = open("product_issue", "a")
+        issue_file.write(issue_details)
+        issue_file.close() 
 
     print('Do you want to continue? Y/N ')
     end_choice = input()
