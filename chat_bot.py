@@ -1,4 +1,6 @@
 import time
+import json
+
 
 continue_flag = 1
 tickets = ['123','124']
@@ -38,16 +40,35 @@ while (continue_flag==1):
                 print('Ticket number not found, please enter again')
                 
     else:
-        print('Create new ticket number')
-    
+        print('Create new ticket')
+        
+        json_file = open('products.json',)
+        product_list = json.load(json_file)
+
+        print('Product List:')
+
+        for i in product_list['products']:
+            print(i)
+
+        print('For which product do you want to raise a ticket ')
+        product_choice = input()
+        issue_product = ''
+        temp_count = 0
+        for i in product_list['products']:
+            temp_count = temp_count+1
+            if(temp_count==int(product_choice)):
+                issue_product=i
+
+        print('Product '+issue_product)
 
 
 
 
-    print('Do you want to continue? Y/N \n\n\n')
+    print('Do you want to continue? Y/N ')
     end_choice = input()
     if(end_choice=='y' or end_choice=='Y'):
         continue_flag = 1
+        print('\n\n\n')
     else:
         continue_flag = 0
         print('Thank you!\n\n\n')
